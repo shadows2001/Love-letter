@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 2nd Monthsary Love Letter 💌</title>
+  <style>
+    body {
+      background-color: #ffebf0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      position: relative;
+    }
+
+    .container {
+      position: relative;
+      width: 250px;
+      height: 180px;
+    }
+
+    .envelope {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #ff4f6d;
+      border-radius: 10px;
+      box-shadow: 0px 5px 20px rgba(255, 0, 50, 0.6);
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        box-shadow: 0px 5px 15px rgba(255, 0, 50, 0.4);
+      }
+
+      100% {
+        box-shadow: 0px 5px 25px rgba(255, 0, 50, 0.8);
+      }
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-color: #ff758c;
+      clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+      transition: 0.5s ease-in-out;
+    }
+
+    .letter {
+      position: absolute;
+      top: 20px;
+      left: 10px;
+      width: 230px;
+      height: 120px;
+      background-color: white;
+      border-radius: 5px;
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+      transform: translateY(50px);
+      transition: 0.5s ease-in-out;
+      overflow-y: auto;
+      max-height: 120px;
+    }
+
+    .open .letter {
+      transform: translateY(-20px);
+    }
+
+    .open .flap {
+      transform: rotateX(180deg);
+    }
+
+    /* Envelope Button */
+    .envelope-button {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      color: #ff4f6d;
+      border: 2px solid #ff4f6d;
+      padding: 5px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    /* Play Music Button */
+    .play-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ff4f6d;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Play Music Button -->
+  <button class="play-button" onclick="playMusic()">🎶 Play Music</button>
+
+  <div class="container">
+    <div class="envelope">
+      <div class="flap"></div>
+    </div>
+    <div class="letter" id="loveLetter">
+      <h3>Happy 2nd Monthsary Manja ❤️</h3>
+      <p>My love,</p>
+      <p>These past two months have truly been the happiest of my life. Your love and kindness, even with your occasional anger issues (just kidding, babe!), brighten my days in ways I never expected. Your cuteness and smile have a way of lighting up even my darkest moments.</p>
+      <p>I can’t express enough how grateful I am to have you by my side. Thank you for making me laugh, for always being there for me, and for the abundant love you share</p>
+      <p>I’m so excited to create more beautiful memories together. I love you more than words can say.</p>
+      <p>to many more months, years, and a lifetime together. I love you endlessly. 💕</p>
+      <p>Forever yours,</p>
+      <strong>❤Your NightFury❤</strong>
+    </div>
+
+    <!-- Button to Open/Close Envelope -->
+    <button class="envelope-button" onclick="toggleLetter()">Open/Close</button>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="https://www.chrisandrianyang.com/whatithinkof.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    var music = document.getElementById("bgMusic");
+
+    function toggleLetter() {
+      var container = document.querySelector('.container');
+      var letter = document.getElementById("loveLetter");
+      container.classList.toggle('open');
+      if (container.classList.contains('open')) {
+        setTimeout(() => {
+          slowScrollToBottom(letter, 6000); // Slower scroll (6 seconds)
+        }, 500);
+        playMusic();
+      }
+    }
+
+    function playMusic() {
+      if (music.paused) {
+        music.play().catch(() => {
+          alert("Tap the play button to start music 🎶");
+        });
+      }
+    }
+
+    function slowScrollToBottom(element, duration) {
+      var start = element.scrollTop;
+      var end = element.scrollHeight - element.clientHeight;
+      var distance = end - start;
+      var startTime = null;
+
+      function animationStep(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        element.scrollTop = start + distance * progress;
+        if (progress < 1) {
+          requestAnimationFrame(animationStep);
+        }
+      }
+      requestAnimationFrame(animationStep);
+    }
+  </script>
+
+</body>
+
+</html>
